@@ -3,7 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const topicsSlice = createSlice({
   name: "topicsSlice",
   initialState: {
-    topics: {
+    topics: { // Placeholder must be here to not throw error. Issue with quizIds not defined
         id: 1,
         name: 'Placeholder Topic',
         icon: 'default',
