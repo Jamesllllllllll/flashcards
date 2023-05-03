@@ -3,7 +3,14 @@ import { createSlice } from "@reduxjs/toolkit";
 export const topicsSlice = createSlice({
   name: "topicsSlice",
   initialState: {
-    topics: {}
+    topics: {
+        123: {
+          id: "123",
+          name: "example topic",
+          icon: "icon url",
+          quizIds: ["456"]
+        }
+    }
   },
   reducers: {
     addTopic: (state, action) => {
@@ -13,14 +20,14 @@ export const topicsSlice = createSlice({
           id: action.payload.id,
           name: action.payload.name,
           icon: action.payload.icon,
-          quizIds: action.payload.quizIds
+          quizIds: []
         }
       };
     }
   }
 });
 
-export const selectTopics = state => state.topics;
+export const selectTopics = (state) => state.topics.topics;
 
 export const { addTopic } = topicsSlice.actions;
 
