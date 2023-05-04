@@ -1,4 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+
+export const addToQuizIds = createAsyncThunk(
+  'topics/addToQuizIds',
+  async (addQuiz, { dispatch }) => {
+    const response = await dispatch(addQuiz);
+    return response;
+  }
+  //...state,
+  //[action.payload.id]: {
+  //  quizIds: state.topics.quizIds.push(action.payload.quizIds)
+  // Step 11: Something that adds a quiz's id to the quizIds  
+  // array of the topic the quiz is associated with.
+  // This action will receive a payload of the form
+  // {quizId: '123', topicId: '456'}.
+);
 
 export const topicsSlice = createSlice({
   name: "topicsSlice",
@@ -23,23 +38,11 @@ export const topicsSlice = createSlice({
         }
       };
     },
-    addToQuizIds: (state, action) => {
-      return {
-        ...state,
-        [action.payload.id]: {
-          quizIds: state.topics.quizIds.push(action.payload.quizIds)
-        }
-       // Step 11: Something that adds a quiz's id to the quizIds  
-       // array of the topic the quiz is associated with.
-       // This action will receive a payload of the form
-       // {quizId: '123', topicId: '456'}.
-      };
-    }
   }
 });
 
 export const selectTopics = (state) => state.topics;
 
-export const { addTopic, addToQuizIds } = topicsSlice.actions;
+export const { addTopic } = topicsSlice.actions;
 
 export default topicsSlice.reducer;

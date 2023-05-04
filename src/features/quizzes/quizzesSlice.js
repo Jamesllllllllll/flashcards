@@ -10,6 +10,7 @@ export const createQuiz = createAsyncThunk(
   }
 );
 
+
 export const quizzesSlice = createSlice({
   name: "quizzesSlice",
   initialState: {
@@ -19,8 +20,14 @@ export const quizzesSlice = createSlice({
         topicId: "227fad11-9788-4825-a255-3a0f2de22c61",
         name: "quiz for example topic",
         cardIds: ["789", "101", "102"]
-      }
-    }
+      },
+      789: {
+        id: "789",
+        topicId: "227fad11-9788-4825-a255-3a0f2de22c61",
+        name: "another quiz for example topic",
+        cardIds: ["789", "101", "102"]
+      },
+    },
   },
   reducers: {
     addQuiz: (state, action) => {
@@ -51,11 +58,12 @@ export const quizzesSlice = createSlice({
       .addCase(createQuiz.rejected, (state) => {
         state.isSavingQuiz = false;
         state.failedToSaveQuiz = true;
+        alert('Error!');
       })
   }
 });
 
-export const selectQuizzes = (state) => state.quizzes;
+export const selectQuizzes = (state) => state.quizzes.quizzes;
 
 export const { addQuiz } = quizzesSlice.actions;
 
