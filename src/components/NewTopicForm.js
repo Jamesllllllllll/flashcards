@@ -11,19 +11,22 @@ export default function NewTopicForm() {
   const [icon, setIcon] = useState("");
   const history = useHistory();
   const dispatch = useDispatch();
- 
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (name.length === 0) {
       return;
     }
+
+    const quizIds = [];
+
     const topicId = uuidv4();
-        dispatch(
+    dispatch(
       addTopic({
         id: topicId,
         name: name,
         icon: icon,
-        quizIds: [],
+        quizIds: quizIds,
       })
     );
     // dispatch your add topic action here

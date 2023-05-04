@@ -4,8 +4,8 @@ import { addToQuizIds } from "../topics/topicsSlice";
 // Fix function createQuiz below
 export const createQuiz = createAsyncThunk(
   'quizzes/createQuiz',
-  async (quiz, thunkApi) => {
-    const response = await thunkApi.dispatch(addQuiz);
+  async (addQuiz, { dispatch }) => {
+    const response = await dispatch(addQuiz);
     // await thunkApi.dispatch(addToQuizIds); 
   }
 );
