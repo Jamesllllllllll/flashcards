@@ -16,7 +16,7 @@ export const topicsSlice = createSlice({
   reducers: {
     addTopic: (state, action) => {
       return {
-        ...state,
+        ...state.topics,
         [action.payload.id]: {
           id: action.payload.id,
           name: action.payload.name,
@@ -40,7 +40,7 @@ export const topicsSlice = createSlice({
   }
 });
 
-export const selectTopics = (state) => state.topics.topics;
+export const selectTopics = (state) => state.topics;
 
 export const { addTopic, addToQuizIds } = topicsSlice.actions;
 

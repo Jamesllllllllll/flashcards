@@ -26,7 +26,7 @@ export default function NewQuizForm() {
     // create the new quiz here
     const quizId = uuidv4();
     dispatch(
-      createQuiz({
+      addQuiz({
         id: quizId,
         name: name,
         topicId: topicId,
