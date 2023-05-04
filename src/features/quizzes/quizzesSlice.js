@@ -4,8 +4,10 @@ import { addToQuizIds } from "../topics/topicsSlice";
 // Fix function createQuiz below
 export const createQuiz = createAsyncThunk(
   'quizzes/createQuiz',
-  async (addQuiz, { dispatch }) => {
-    const response = await dispatch(addQuiz);
+  async (quiz) => {
+    const response = await addQuiz(quiz);
+    const addQuizId = await addToQuizIds(response);
+    return addQuizId;
     // await thunkApi.dispatch(addToQuizIds); 
   }
 );
@@ -32,13 +34,15 @@ export const quizzesSlice = createSlice({
   reducers: {
     addQuiz: (state, action) => {
       return {
-        ...state,
+        quizzes: {
+          ...state.quizzes,
         [action.payload.id]: {
           id: action.payload.id,
           name: action.payload.name,
           topicId: action.payload.topicId,
           cardIds: action.payload.cardIds
         }
+      }
       };
     },
   },

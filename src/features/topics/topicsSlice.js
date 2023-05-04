@@ -30,9 +30,9 @@ export const topicsSlice = createSlice({
     },
     addToQuizIds: (state, action) => {
       return {
-        ...state,
-        [action.payload.quizId]: {
-          quizIds: state.topics.quizIds.push(action.payload.quizIds)
+        ...state.topics,
+        [action.payload.topicId]: {
+          quizIds: state.topics.quizIds.push(action.payload.quizId)
         }
         // Step 11: Something that adds a quiz's id to the quizIds
         // array of the topic the quiz is associated with.
