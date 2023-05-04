@@ -6,6 +6,13 @@
 html,
 body {
   margin: 0;
+  display: flex;
+  justify-content: center;
+}
+
+#root {
+  min-width: 400px;
+  max-width: 600px;
 }
 
 nav {
