@@ -3,14 +3,18 @@ import { addToQuizIds } from "../topics/topicsSlice";
 
 // Fix function createQuiz below
 export const createQuiz = createAsyncThunk(
-  'quizzes/createQuiz',
-  async (quiz) => {
+  "quizzes/createQuiz",
+  async (quiz, { dispatch }) => {
     const response = await addQuiz(quiz);
-    const addQuizId = await addToQuizIds(response);
-    return addQuizId;
-    // await thunkApi.dispatch(addToQuizIds); 
+    const quizId = await addToQuizIds(quiz);
+    // const addQuizId = await addToQuizIds(response);
+    // console.log(response);
+    dispatch(response);
+    dispatch(quizId);
+    // await thunkApi.dispatch(addToQuizIds);
   }
 );
+
 
 
 export const quizzesSlice = createSlice({
@@ -28,26 +32,28 @@ export const quizzesSlice = createSlice({
         topicId: "227fad11-9788-4825-a255-3a0f2de22c61",
         name: "another quiz for example topic",
         cardIds: ["789", "101", "102"]
-      },
-    },
+      }
+    }
   },
   reducers: {
     addQuiz: (state, action) => {
       return {
         quizzes: {
           ...state.quizzes,
-        [action.payload.id]: {
-          id: action.payload.id,
-          name: action.payload.name,
-          topicId: action.payload.topicId,
-          cardIds: action.payload.cardIds
+          [action.payload.id]: {
+            id: action.payload.id,
+            name: action.payload.name,
+            topicId: action.payload.topicId,
+            cardIds: action.payload.cardIds
+          }
         }
-      }
       };
-    },
+    }
   },
   failedToSaveQuiz: false,
   isSavingQuiz: false,
+  isAddingQuizId: false,
+  failedToAddId: false,
   extraReducers: (builder) => {
     builder
       .addCase(createQuiz.pending, (state) => {
@@ -57,13 +63,25 @@ export const quizzesSlice = createSlice({
       .addCase(createQuiz.fulfilled, (state, action) => {
         state.isSavingQuiz = false;
         state.failedToSaveQuiz = false;
-        state.quizzes = action.payload; // This is probably wrong
+        // state.quizzes = action.payload; // This is probably wrong
       })
       .addCase(createQuiz.rejected, (state) => {
         state.isSavingQuiz = false;
         state.failedToSaveQuiz = true;
-        alert('Error!');
+        alert("Error!");
       })
+      /*.addCase(addToQuizIds.pending, (state) => {
+        state.isAddingQuizId = true;
+        state.failedToAddId = false;
+      })
+      .addCase(addToQuizIds.fulfilled, (state, action) => {
+        state.isAddingQuizId = false;
+        state.failedToAddId = false;
+      })
+      .addCase(addToQuizIds.rejected, (state) => {
+        state.isAddingQuizId = false;
+        state.failedToAddId = true;
+      });*/
   }
 });
 

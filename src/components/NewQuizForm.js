@@ -3,8 +3,8 @@ import { useHistory } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import ROUTES from "../app/routes";
 import { selectTopics } from "../features/topics/topicsSlice";
-import { addQuiz, createQuiz } from "../features/quizzes/quizzesSlice";
-import { useDispatch } from "react-redux";
+import { createQuiz } from "../features/quizzes/quizzesSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function NewQuizForm() {
   const [name, setName] = useState("");
@@ -12,7 +12,7 @@ export default function NewQuizForm() {
   const [topicId, setTopicId] = useState("");
   const history = useHistory();
   const dispatch = useDispatch();
-  const topics = selectTopics;
+  const topics = useSelector(selectTopics);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -26,7 +26,7 @@ export default function NewQuizForm() {
     // create the new quiz here
     const quizId = uuidv4();
     dispatch(
-      addQuiz({
+      createQuiz({
         id: quizId,
         name: name,
         topicId: topicId,
@@ -68,7 +68,7 @@ export default function NewQuizForm() {
           placeholder="Topic"
         >
           <option value="">Topic</option>
-          {Object.values(topics).map((topic) => (
+          {Object.values(topics.topics).map((topic) => (
             <option key={topic.id} value={topic.id}>
               {topic.name}
             </option>
