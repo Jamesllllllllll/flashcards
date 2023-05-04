@@ -17,7 +17,6 @@ export const topicsSlice = createSlice({
   reducers: {
     addTopic: (state, action) => {
       return {
-        ...state,
         topics: {
           ...state.topics,
           [action.payload.id]: {
