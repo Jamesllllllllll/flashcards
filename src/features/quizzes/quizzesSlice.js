@@ -3,36 +3,32 @@ import { addToQuizIds } from "../topics/topicsSlice";
 
 // Fix function createQuiz below
 export const createQuiz = createAsyncThunk(
-  "quizzes/createQuiz",
+  "quizzesSlice/createQuiz",
   async (quiz, { dispatch }) => {
     const response = await addQuiz(quiz);
-    const quizId = await addToQuizIds(quiz);
-    // const addQuizId = await addToQuizIds(response);
-    // console.log(response);
     dispatch(response);
-    dispatch(quizId);
-    // await thunkApi.dispatch(addToQuizIds);
+    const quizId = {quizId: response.payload.id, topicId: response.payload.topicId};
+    const addedQuiz = await addToQuizIds(quizId);
+    dispatch(addedQuiz);
   }
 );
-
-
 
 export const quizzesSlice = createSlice({
   name: "quizzesSlice",
   initialState: {
     quizzes: {
-      456: {
-        id: "456",
-        topicId: "227fad11-9788-4825-a255-3a0f2de22c61",
-        name: "quiz for example topic",
-        cardIds: ["789", "101", "102"]
-      },
-      789: {
-        id: "789",
-        topicId: "227fad11-9788-4825-a255-3a0f2de22c61",
-        name: "another quiz for example topic",
-        cardIds: ["789", "101", "102"]
-      }
+      // 456: {
+      //   id: "456",
+      //   topicId: "1",
+      //   name: "quiz for example topic",
+      //   cardIds: ["789", "101", "102"]
+      // },
+      // 789: {
+      //   id: "789",
+      //   topicId: "1",
+      //   name: "another quiz for example topic",
+      //   cardIds: ["789", "101", "102"]
+      // }
     }
   },
   reducers: {
@@ -52,8 +48,8 @@ export const quizzesSlice = createSlice({
   },
   failedToSaveQuiz: false,
   isSavingQuiz: false,
-  isAddingQuizId: false,
-  failedToAddId: false,
+  // isAddingQuizId: false,
+  // failedToAddId: false,
   extraReducers: (builder) => {
     builder
       .addCase(createQuiz.pending, (state) => {
@@ -70,18 +66,6 @@ export const quizzesSlice = createSlice({
         state.failedToSaveQuiz = true;
         alert("Error!");
       })
-      /*.addCase(addToQuizIds.pending, (state) => {
-        state.isAddingQuizId = true;
-        state.failedToAddId = false;
-      })
-      .addCase(addToQuizIds.fulfilled, (state, action) => {
-        state.isAddingQuizId = false;
-        state.failedToAddId = false;
-      })
-      .addCase(addToQuizIds.rejected, (state) => {
-        state.isAddingQuizId = false;
-        state.failedToAddId = true;
-      });*/
   }
 });
 
