@@ -68,7 +68,7 @@ export default function NewQuizForm() {
           placeholder="Topic"
         >
           <option value="">Topic</option>
-          {Object.values(topics.topics).map((topic) => (
+          {Object.values(topics).map((topic) => (
             <option key={topic.id} value={topic.id}>
               {topic.name}
             </option>

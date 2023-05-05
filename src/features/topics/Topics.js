@@ -11,7 +11,7 @@ export default function Topics() {
     <section className="center">
       <h1>Topics</h1>
       <ul className="topics-list">
-        {Object.values(topics.topics).map((topic) => (
+        {Object.values(topics).map((topic) => (
           <li className="topic" key={topic.id}>
           <Link to={ROUTES.topicRoute(topic.id)} className="topic-link">
            <div className="topic-container">
