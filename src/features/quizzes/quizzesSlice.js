@@ -21,13 +21,13 @@ export const quizzesSlice = createSlice({
       //   id: "456",
       //   topicId: "1",
       //   name: "quiz for example topic",
-      //   cardIds: ["789", "101", "102"]
+      //   cardIds: []
       // },
       // 789: {
       //   id: "789",
       //   topicId: "1",
       //   name: "another quiz for example topic",
-      //   cardIds: ["789", "101", "102"]
+      //   cardIds: []
       // }
     }
   },

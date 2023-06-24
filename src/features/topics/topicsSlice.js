@@ -4,14 +4,13 @@ export const topicsSlice = createSlice({
   name: "topicsSlice",
   initialState: {
     topics: {
-      // Placeholder must be here to not throw error. Issue with quizIds not defined
-      // 1: {
-      //   id: "1",
-      //   name: "Placeholder Topic",
-      //   icon:
-      //     "https://static-assets.codecademy.com/skillpaths/react-redux/redux-quiz-app/shuttlecock.svg",
-      //   quizIds: ["456", "789"]
-      // }
+      1: {
+        id: "1",
+        name: "Placeholder Topic",
+        icon:
+          "https://static-assets.codecademy.com/skillpaths/react-redux/redux-quiz-app/shuttlecock.svg",
+        quizIds: ["456", "789"]
+      }
     }
   },
   reducers: {
